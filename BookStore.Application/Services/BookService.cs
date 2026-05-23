@@ -33,7 +33,7 @@ public class BookService : IBookService
     {
         var book = await _bookRepository.GetByIdAsync(id);
         if (book is null)
-            throw new Exception("Book not found");
+            throw new KeyNotFoundException("Book not found");
         book.Delete();
         await _bookRepository.UpdateAsync(book);
 
@@ -71,7 +71,7 @@ public class BookService : IBookService
     {
         var book = await _bookRepository.GetByIdAsync(id);
         if (book is null)
-            throw new Exception("Book not found");
+            throw new KeyNotFoundException("Book not found");
         return MapToDto(book);
     }
 
@@ -79,7 +79,7 @@ public class BookService : IBookService
     {
         var book = await _bookRepository.GetByIdAsync(id);
         if (book is null)
-            throw new Exception("Book not found");
+            throw new KeyNotFoundException("Book not found");
         book.Update(
           request.Name,
            request.AuthorName,
